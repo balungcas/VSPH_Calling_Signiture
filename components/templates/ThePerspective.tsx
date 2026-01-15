@@ -4,17 +4,14 @@ import { SignatureData } from '../../types';
 
 const ThePerspective: React.FC<{ data: SignatureData }> = ({ data }) => {
   const hasContact = data.email || data.website || data.phone;
-
-  // Split name to create the stacked bold look from the original design
   const nameParts = data.name.toUpperCase().split(' ');
   const firstName = nameParts[0] || '';
   const lastName = nameParts.slice(1).join(' ') || '';
 
   return (
-    <div style={{ fontFamily: "'Helvetica', sans-serif", width: '100%', color: '#000' }}>
+    <div style={{ fontFamily: "'Helvetica', 'Arial', sans-serif", width: '100%', color: '#000' }}>
       <table cellPadding="0" cellSpacing="0" style={{ width: '100%', borderCollapse: 'collapse' }}>
         <tr>
-          {/* Identity Section */}
           <td style={{ padding: '20px', borderRight: (hasContact || data.imageUrl) ? '1px solid #eee' : 'none', width: '45%' }}>
             {data.name && (
               <div style={{ fontSize: '28px', fontStretch: 'condensed', fontWeight: 900, letterSpacing: '-2px', lineHeight: '0.9', textTransform: 'uppercase' }}>
@@ -34,7 +31,6 @@ const ThePerspective: React.FC<{ data: SignatureData }> = ({ data }) => {
             )}
           </td>
 
-          {/* Contact Details Section */}
           {hasContact && (
             <td style={{ paddingLeft: '20px', verticalAlign: 'bottom', paddingBottom: '20px' }}>
               <div style={{ fontSize: '11px', lineHeight: '1.8', color: '#000' }}>
@@ -57,17 +53,16 @@ const ThePerspective: React.FC<{ data: SignatureData }> = ({ data }) => {
             </td>
           )}
 
-          {/* Image Section */}
           {data.imageUrl && (
             <td style={{ textAlign: 'right', verticalAlign: 'bottom', paddingBottom: '20px' }}>
               <img 
                 src={data.imageUrl} 
-                width="50" 
-                height="50" 
+                width="60" 
+                height="60" 
                 style={{ 
                   display: 'inline-block', 
-                  filter: 'grayscale(100%) contrast(1.2)', 
-                  WebkitFilter: 'grayscale(100%) contrast(1.2)',
+                  filter: 'grayscale(100%) contrast(1.4) brightness(0.9)', 
+                  WebkitFilter: 'grayscale(100%) contrast(1.4) brightness(0.9)',
                   objectFit: 'cover',
                   border: '1px solid #eee' 
                 }}

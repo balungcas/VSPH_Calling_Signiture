@@ -6,13 +6,12 @@ const DraftingDetail: React.FC<{ data: SignatureData }> = ({ data }) => {
   const hasContact = data.email || data.website || data.location || data.phone;
 
   return (
-    <div style={{ fontFamily: "'Inter', sans-serif", color: '#000', maxWidth: '600px', margin: '0 auto' }}>
+    <div style={{ fontFamily: "'Inter', 'Helvetica', sans-serif", color: '#000', maxWidth: '600px', margin: '0 auto' }}>
       <table cellPadding="0" cellSpacing="0" style={{ width: '100%', borderCollapse: 'collapse' }}>
         <tr>
           {data.imageUrl && (
             <td style={{ verticalAlign: 'top', width: '120px', paddingRight: '40px' }}>
               <div style={{ position: 'relative' }}>
-                {/* Drafting Crosshairs */}
                 <div style={{ position: 'absolute', top: '-10px', left: '-10px', width: '20px', height: '0.5px', background: '#000' }}></div>
                 <div style={{ position: 'absolute', top: '-20px', left: '0', width: '0.5px', height: '20px', background: '#000' }}></div>
                 <img 
@@ -20,8 +19,8 @@ const DraftingDetail: React.FC<{ data: SignatureData }> = ({ data }) => {
                   width="120" 
                   height="150" 
                   style={{ 
-                    filter: 'grayscale(100%) contrast(1.2)', 
-                    WebkitFilter: 'grayscale(100%) contrast(1.2)',
+                    filter: 'grayscale(100%) contrast(1.4) brightness(0.95)', 
+                    WebkitFilter: 'grayscale(100%) contrast(1.4) brightness(0.95)',
                     objectFit: 'cover', 
                     display: 'block' 
                   }}
@@ -44,7 +43,7 @@ const DraftingDetail: React.FC<{ data: SignatureData }> = ({ data }) => {
             )}
             
             {hasContact && (
-              <table cellPadding="0" cellSpacing="0" style={{ width: '100%', fontFamily: "'JetBrains Mono', monospace", fontSize: '11px', borderTop: '1px solid #000', paddingTop: '15px' }}>
+              <table cellPadding="0" cellSpacing="0" style={{ width: '100%', fontFamily: "monospace", fontSize: '11px', borderTop: '1px solid #000', paddingTop: '15px' }}>
                 <tr>
                   <td style={{ color: '#000', lineHeight: '1.8' }}>
                     {data.email && (

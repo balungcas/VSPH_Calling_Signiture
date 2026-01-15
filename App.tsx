@@ -22,23 +22,37 @@ const App: React.FC = () => {
   const [activeTemplate, setActiveTemplate] = useState<TemplateId>('vsph-opt-1');
   const [showToast, setShowToast] = useState(false);
 
-  const handleCopy = useCallback(() => {
-    const signatureElement = document.getElementById('signature-output');
+  const handleCopy = useCallback(async () => {
+    const signatureElement = document.getElementById('signature-output-content');
     if (!signatureElement) return;
 
-    const range = document.createRange();
-    range.selectNode(signatureElement);
-    window.getSelection()?.removeAllRanges();
-    window.getSelection()?.addRange(range);
-
     try {
-      document.execCommand('copy');
+      // Create HTML blob for rich text copying
+      const blob = new Blob([signatureElement.innerHTML], { type: 'text/html' });
+      const plainBlob = new Blob([signatureElement.innerText], { type: 'text/plain' });
+      
+      const item = new ClipboardItem({
+        'text/html': blob,
+        'text/plain': plainBlob
+      });
+
+      await navigator.clipboard.write([item]);
+      
       setShowToast(true);
       setTimeout(() => setShowToast(false), 3000);
     } catch (err) {
-      console.error('Failed to copy', err);
+      console.error('Failed to copy via modern API, falling back to legacy:', err);
+      // Fallback for older browsers
+      const range = document.createRange();
+      range.selectNode(signatureElement);
+      window.getSelection()?.removeAllRanges();
+      window.getSelection()?.addRange(range);
+      document.execCommand('copy');
+      window.getSelection()?.removeAllRanges();
+      
+      setShowToast(true);
+      setTimeout(() => setShowToast(false), 3000);
     }
-    window.getSelection()?.removeAllRanges();
   }, []);
 
   return (

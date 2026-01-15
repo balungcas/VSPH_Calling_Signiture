@@ -28,7 +28,9 @@ const SignaturePreview: React.FC<SignaturePreviewProps> = ({ data, templateId })
         id="signature-output"
         className="bg-white p-12 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.1)] border border-black/5 transition-all duration-500 hover:shadow-[0_20px_60px_-10px_rgba(0,0,0,0.12)] hover:border-black/20"
       >
-        {renderTemplate()}
+        <div id="signature-output-content">
+          {renderTemplate()}
+        </div>
       </div>
 
       <div className="mt-8 flex justify-center">
